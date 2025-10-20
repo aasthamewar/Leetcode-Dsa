@@ -1,23 +1,23 @@
 class Solution {
 public:
-    int lengthOfLongestSubstring(string str) {
-          if(str.size()==0)
-      return 0;
-  int maxans = INT_MIN;
-  unordered_set < int > set;
-  int l = 0;
-  for (int r = 0; r < str.length(); r++) // outer loop for traversing the string
-  {
-    if (set.find(str[r]) != set.end()) //if duplicate element is found
-    {
-      while (l < r && set.find(str[r]) != set.end()) {
-        set.erase(str[l]);
-        l++;
-      }
-    }
-    set.insert(str[r]);
-    maxans = max(maxans, r - l + 1);
-  }
-  return maxans;
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> seen;
+        int left = 0, right = 0, maxlen = 0;
+
+        while (right < s.size()) {
+            // if character not seen we will expand the window
+            if (seen.find(s[right]) == seen.end()) {
+                seen.insert(s[right]);
+                maxlen = max(maxlen, right - left + 1);
+                right++;
+            }
+            // if duplicate found , we will shrink window from left
+            else {
+                seen.erase(s[left]);
+                left++;
+            }
+        }
+
+        return maxlen;
     }
 };
