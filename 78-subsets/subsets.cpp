@@ -1,28 +1,26 @@
 class Solution {
 private:
- void solve(vector<int>& nums,vector<int> op,int index,vector<vector<int>>& ans){
-
-    //base case
+void solve(vector<int>& nums,vector<int>& op,int index,vector<vector<int>> & ans){
+    //base condition
     if(index>=nums.size()){
         ans.push_back(op);
-        return ;
+        return;
     }
-    //exclude
-    solve(nums,op,index+1,ans);
-
     //include
     int element=nums[index];
     op.push_back(element);
     solve(nums,op,index+1,ans);
- 
- }
+    op.pop_back();
+
+    //exclude
+    solve(nums,op,index+1,ans);
+}
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> op;
-        int index=0;
-        solve(nums,op,index,ans);
-        return ans;
-        
+         vector<vector<int>> ans;
+         vector<int>op;
+         int index=0;
+         solve(nums,op,index,ans);
+         return ans;
     }
 };
