@@ -1,24 +1,30 @@
 class Solution {
 public:
     bool isValid(string s) {
-        bool found = false;
         stack<char> st;
-        for (int i = 0; i < s.size(); i++) {
-            if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
-                st.push(s[i]);
-            } else {
-                if (st.empty()) {
-                    return false;
-                }
-                char ch = st.top();
+
+        for (char c : s) {
+            // Push opening brackets
+            if (c == '(' || c == '{' || c == '[') {
+                st.push(c);
+            } 
+            else {
+                // If stack is empty, no matching opening bracket
+                if (st.empty()) return false;
+
+                char top = st.top();
                 st.pop();
-                if ((s[i] == ')' && ch != '(') || (s[i] == '}' && ch != '{') ||
-                    (s[i] == ']' && ch != '[')) {
-                    return false; // Mismatch found
+
+                // Mismatch cases
+                if ((c == ')' && top != '(') ||
+                    (c == '}' && top != '{') ||
+                    (c == ']' && top != '[')) {
+                    return false;
                 }
             }
         }
+
+        // Valid only if no unmatched opening brackets remain
         return st.empty();
-       
     }
 };
