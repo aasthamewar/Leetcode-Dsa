@@ -1,16 +1,33 @@
 class Solution {
 public:
     string intToRoman(int num) {
-        vector<pair<int, string>> roman = {
-            {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
-            {100, "C"},  {90, "XC"},  {50, "L"},  {40, "XL"},
-            {10, "X"},   {9, "IX"},   {5, "V"},   {4, "IV"},
-            {1, "I"}
+        // vector<pair<int, string>> roman = {
+        //     {1000, "M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
+        //     {100, "C"},  {90, "XC"},  {50, "L"},  {40, "XL"},
+        //     {10, "X"},   {9, "IX"},   {5, "V"},   {4, "IV"},
+        //     {1, "I"}
+        // };
+        // string ans="";
+        // for(int i=0;i<roman.size();i++){
+        //     int value=roman[i].first;
+        //     string symbol=roman[i].second;
+
+        //     while(num>=value){
+        //         ans+=symbol;
+        //         num-=value;
+        //     }
+        // }
+        // return ans;
+
+        vector<pair<int, string>> roman={
+            {1000,"M"}, {900, "CM"}, {500, "D"}, {400, "CD"},
+            {100, "C"}, {90, "XC"}, {50, "L"}, {40, "XL"},
+            {10, "X"}, {9, "IX"}, {5, "V"}, {4, "IV"}, {1, "I"}
         };
-        string ans="";
+        string ans = "";
         for(int i=0;i<roman.size();i++){
-            int value=roman[i].first;
-            string symbol=roman[i].second;
+            int value = roman[i].first;
+            string symbol = roman[i].second;
 
             while(num>=value){
                 ans+=symbol;
