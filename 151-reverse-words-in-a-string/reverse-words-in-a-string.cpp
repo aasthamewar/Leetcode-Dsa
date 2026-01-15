@@ -1,33 +1,26 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        int n=s.size();
-        string ans = "";
-        // traverse from right to left
-        int i=n-1;
-        while(i>=0){
-            // skiping trailing
-            while(i>=0 && s[i]==' '){
-                i--;
-            }
-            if(i<0){
-                break;
-            }
+        int n = s.size();
+        string ans="";
 
-            // collecting a string
-            string word=""; 
-            while(i>=0 && s[i]!=' '){
-                word = s[i]+word;
-                i--;
+        // first reverse the whole s
+        reverse(s.begin(),s.end());
+        for(int i=0;i<n;i++){
+            // stores words by words
+            string word = "";
+            while(i<n && s[i]!=' '){
+                word+=s[i];
+                i++;
             }
+            // after storing reverse the word
+            reverse(word.begin(),word.end());
 
-            // Append the result
-            if(!ans.empty()){
-                ans+=" ";
+            // check if length of word is greater than 0
+            if(word.size()>0){
+                ans+=" "+word;
             }
-            ans+=word;
-
         }
-        return ans;
+        return ans.substr(1);
     }
 };
