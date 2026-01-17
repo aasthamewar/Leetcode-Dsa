@@ -1,25 +1,24 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        int left=0;
-        int right=height.size()-1;
-        int maxiWater=0;
-        while(left<right){
-            int width=right-left;
-            int effective_height=min(height[left],height[right]);
+        int maxiwater=0;
+        int start=0,end=height.size()-1;
+        while(start<end){
+            int width=end-start;
+            int effective_height=min(height[start],height[end]);
             int area=width*effective_height;
 
-            //updating area
-            maxiWater=max(maxiWater,area);
+            // update the area
+            maxiwater=max(maxiwater,area);
 
-            //move pointer
-            if(height[left]<height[right]){
-                left++;
+            // move the pointer
+            if(height[start]<height[end]){
+                start++;
             }
             else{
-                right--;
+                end--;
             }
         }
-        return maxiWater;
+        return maxiwater;
     }
 };
