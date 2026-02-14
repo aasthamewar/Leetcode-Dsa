@@ -1,22 +1,23 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int i = nums.size() - 1;
-        while (i > 0 && nums[i-1] >= nums[i]) {
-            i--;
+        int pivot=-1;
+        int n=nums.size();
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                pivot=i;
+                break;
+            }
         }
-        
-        if (i == 0) {
-            reverse(nums.begin(), nums.end());
-            return;
+        // if pivot exist, find the largest element
+        if(pivot!=-1){
+            for(int i=n-1;i>=0;i--){
+                if(nums[i]>nums[pivot]){
+                    swap(nums[i],nums[pivot]);
+                    break;
+                }
+            }
         }
-        
-        int j = nums.size() - 1;
-        while (j >= i && nums[j] <= nums[i-1]) {
-            j--;
-        }
-        
-        swap(nums[i-1], nums[j]);
-        reverse(nums.begin() + i, nums.end());        
+        return reverse(nums.begin()+pivot+1,nums.end());
     }
 };
