@@ -1,20 +1,22 @@
 class Solution {
 public:
-    int findMin(vector<int>& nums) {
-        int start=0,end=nums.size()-1,ans=INT_MAX;
-        while(start<=end){
-            int mid=start+(end-start)/2;
-            //left sorted part
-            if(nums[start]<=nums[mid]){
-                ans=min(ans,nums[start]);
-                start=mid+1;
+    int findMin(vector<int>& nums){
+        int minn = nums[0];
+        int low = 0;
+        int high = nums.size() - 1;
+        while( low <= high){
+            int mid = low + ( high - low ) / 2;
+            if( nums[low] <= nums[mid]){
+                minn = min(minn,nums[low]);
+                low = mid + 1;
             }
-            //right sorted part
             else{
-                ans=min(ans,nums[mid]);
-                end=mid-1;
+                minn = min(minn,nums[mid]);
+                high = mid -1;
             }
         }
-        return ans;
+        return minn;
+
+        
     }
 };
