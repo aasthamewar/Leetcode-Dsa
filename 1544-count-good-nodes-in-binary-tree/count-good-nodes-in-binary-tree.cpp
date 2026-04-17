@@ -11,21 +11,17 @@
  */
 class Solution {
 public:
-    int solve(TreeNode* root, int mx) {
-        if (!root) return 0;
+int solve(TreeNode* root,int maxi){
+    int cnt=0;
+    if(!root)return 0;
+    if(root->val>=maxi)cnt=1;
+    maxi=max(maxi,root->val);
+    cnt+=solve(root->left,maxi);
+    cnt+=solve(root->right,maxi);
 
-        int cnt = 0;
-        if (root->val >= mx) cnt = 1;
-
-        mx = max(mx, root->val);
-
-        cnt += solve(root->left, mx);
-        cnt += solve(root->right, mx);
-
-        return cnt;
-    }
-
+    return cnt;
+}
     int goodNodes(TreeNode* root) {
-        return solve(root, root->val);
+        return solve(root,root->val);
     }
 };
