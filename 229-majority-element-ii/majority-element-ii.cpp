@@ -1,31 +1,20 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-        // vector<int> ls;
-        // map<int,int> mpp;
-        // int n=nums.size();
-        // int mini=(int)(n/3)+1;
-        // for(int i=0;i<n;i++){
-        //     mpp[nums[i]]++;
-        //     if(mpp[nums[i]]==mini){
-        //         ls.push_back(nums[i]);
-        //     }
-        //     if(ls.size()==2)break;
-        // }
-        // sort(ls.begin(),ls.end());
-        // return ls;
-        vector<int> ls;
-        map<int,int> mp;
-        int n = nums.size();
-        int mini = (int)(n/3)+1;
-        for(int i=0;i<n;i++){
+        // [3,2,3]
+        unordered_map<int,int>mp;
+        for(int i=0;i<nums.size();i++){
             mp[nums[i]]++;
-            if(mp[nums[i]] == mini){
-                ls.push_back(nums[i]);
-            }
-            if(ls.size()==2)break;
         }
-        sort(ls.begin(),ls.end());
-        return ls;
+        vector<int>majorityel;
+        int maxcnt=nums.size()/3; //3/3=1
+        for(auto x:mp){
+            int element=x.first; // 2,3,3
+            int cnt=x.second; // 2-1, 3-2
+            if(cnt>maxcnt){
+                majorityel.push_back(element);
+            }
+        }
+        return majorityel;
     }
 };
