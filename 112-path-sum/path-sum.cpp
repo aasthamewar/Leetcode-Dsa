@@ -12,17 +12,12 @@
 class Solution {
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root==NULL)return false;
+        if(root->left==NULL &&  root->right==NULL){
+            return targetSum == root->val ; // if yes return true
+        }
 
-    if(root == NULL)
-        return false;
+        return hasPathSum(root->left,targetSum-root->val) || hasPathSum(root->right , targetSum-root->val);
 
-    if(root->left == NULL && root->right == NULL)
-        return targetSum == root->val;
-
-    return hasPathSum(root->left,
-                      targetSum - root->val)
-        ||
-           hasPathSum(root->right,
-                      targetSum - root->val);
-}
+    }
 };
