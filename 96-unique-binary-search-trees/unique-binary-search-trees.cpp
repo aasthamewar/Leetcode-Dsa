@@ -7,6 +7,5 @@ public:
             ans+=numTrees(i-1)*numTrees(n-i);
         }
         return ans;
-
     }
 };
