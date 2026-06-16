@@ -19,9 +19,9 @@ void inorder(TreeNode* root1,vector<int>& arr){
 }
 void inorder1(TreeNode* root2, vector<int>& arr){
     if(root2==NULL)return;
-    inorder(root2->left,arr);
+    inorder1(root2->left,arr);
     arr.push_back(root2->val);
-    inorder(root2->right,arr);
+    inorder1(root2->right,arr);
 }
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
         vector<int>arr;
