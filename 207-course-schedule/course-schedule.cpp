@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    bool dfs(int src,
+    bool isCycledfs(int src,
              vector<vector<int>>& adj,
              vector<bool>& vis,
              vector<bool>& rec)
@@ -13,7 +13,7 @@ public:
         {
             if(!vis[v])
             {
-                if(dfs(v, adj, vis, rec))
+                if(isCycledfs(v, adj, vis, rec))
                     return true;
             }
             else if(rec[v])
@@ -40,7 +40,7 @@ public:
         {
             if(!vis[i])
             {
-                if(dfs(i, adj, vis, rec))
+                if(isCycledfs(i, adj, vis, rec))
                     return false;
             }
         }
