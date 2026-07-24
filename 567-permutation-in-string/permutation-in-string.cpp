@@ -1,27 +1,34 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        int n1 = s1.size();
-        int n2 = s2.size();
-
-        if (n1 > n2) return false;
-
-        vector<int> s1cnt(26, 0);
-        vector<int> s2cnt(26, 0);
-
-        for(int i = 0; i < n1; i++) {
-            s1cnt[s1[i] - 'a']++;
-            s2cnt[s2[i] - 'a']++;
+        if(s1.size()>s2.size()){
+            return false;
         }
+         vector<int>f1(26,0); // f1->s1
+         vector<int>f2(26,0); // f2->s2
 
-        
-        for(int i = 0; i < n2 - n1; i++) {
-            if (s1cnt == s2cnt) return true;
+         for(int i=0;i<s1.size();i++){
+            f1[s1[i]-'a']++;
+         }
 
-            s2cnt[s2[i] - 'a']--;
-            s2cnt[s2[i + n1] - 'a']++;
-        }
+         for(int i=0;i<s1.size();i++){
+            f2[s2[i]-'a']++;
+         }
+         if(f1==f2){
+            return true;
+         }
+        int k=s1.size();
+         for(int i=k;i<s2.size();i++){
+            f2[s2[i-k]-'a']--;
+            f2[s2[i]-'a']++;
 
-        return s1cnt == s2cnt;
+            if(f1==f2){
+                return true;
+            }
+         }
+         return false;
+
+         
+
     }
 };
