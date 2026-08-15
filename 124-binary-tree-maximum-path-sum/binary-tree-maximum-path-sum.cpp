@@ -6,26 +6,27 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
  * };
  */
 class Solution {
 public:
-int sum;
-    int helper(TreeNode* root) {
-        if(root==NULL){
-            return 0;
-        }
-        int l = max(0,helper(root->left));
-        int r = max(0,helper(root->right));
-        int currsum = root->val+l+r;
-        sum = max(currsum,sum); // update
-        return root->val+max(l,r);
-    }
+int ans = INT_MIN;
 
-    int maxPathSum(TreeNode* root){
-        sum=INT_MIN;
-        helper(root);
-        return sum;
+int solve(TreeNode* root){
+    int maxi=0;
+    if(root==NULL){
+        return 0;
+    }
+    int left = max(0,solve(root->left));
+    int right = max(0,solve(root->right));
+    ans = max(ans,left+right+root->val);
+    // Maximum path that can be extended to parent
+    return root->val + max(left, right);
+}
+    int maxPathSum(TreeNode* root) {
+        solve(root);
+        return ans;
     }
 };
