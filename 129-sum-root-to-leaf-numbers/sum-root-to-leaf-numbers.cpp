@@ -12,19 +12,19 @@
 class Solution {
 public:
 int ans=0;
-
-void solve(TreeNode* root,int curr){
-    if(root==NULL)return;
-    curr=curr*10+root->val;
-    if(root->left==NULL && root->right==NULL){
+void solve(TreeNode* root, int curr){
+    if(root==NULL){
+        return ;
+    }
+    curr = curr*10+root->val;
+    if(root->left == NULL && root->right == NULL){
         ans+=curr;
-        return;
+        return ;
     }
     else{
         solve(root->left,curr);
         solve(root->right,curr);
     }
-
 }
     int sumNumbers(TreeNode* root) {
         int curr=0;
